@@ -716,7 +716,19 @@
     .btn-add-item,
     .btn-remove,
     .item-library,
-    .col-action {
+    .col-action,
+    .btn-import-client {
+        display: none !important;
+    }
+    
+    /* Hide Tridah widget when printing */
+    [data-tridah-widget],
+    .tridah-widget,
+    .tridah-chat,
+    .tridah-chatbot,
+    iframe[src*="tridah"],
+    div[id*="tridah"],
+    div[class*="tridah"] {
         display: none !important;
     }
     
