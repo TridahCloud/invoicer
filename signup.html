@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Invoicer</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="index.html" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Home
+                </a>
+                <img src="tridah icon.png" alt="Tridah" class="auth-logo">
+                <h1 class="auth-title">Create Your Account</h1>
+                <p class="auth-subtitle">Start managing your invoices for free</p>
+            </div>
+
+            <form class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="email" required 
+                           placeholder="you@example.com" autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="password" required 
+                           placeholder="••••••••" autocomplete="new-password" minlength="8">
+                    <small class="form-hint">At least 8 characters</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-input" id="confirmPassword" required 
+                           placeholder="••••••••" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Company Name (Optional)</label>
+                    <input type="text" class="form-input" id="companyName" 
+                           placeholder="Your Business Name">
+                </div>
+
+                <div class="form-footer">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span>I agree to the <a href="#" class="link-text">Terms of Service</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-auth">
+                    Create Account
+                </button>
+
+                <div class="auth-divider">
+                    <span>Already have an account?</span>
+                </div>
+
+                <a href="login.html" class="btn btn-auth-secondary">
+                    Sign In
+                </a>
+            </form>
+
+            <div class="alert alert-error" id="errorMessage" style="display: none;"></div>
+            <div class="alert alert-success" id="successMessage" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>
+

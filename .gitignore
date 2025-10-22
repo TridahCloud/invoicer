@@ -1,0 +1,46 @@
+# Invoicer .gitignore
+
+# Configuration files with sensitive data
+config/database.php
+
+# User uploads
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+*.log
+logs/
+error_log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+cache/
+
+# Backup files
+*.sql
+*.backup
+*.bak
+
+# Node modules (if added in future)
+node_modules/
+
+# Composer (if added in future)
+vendor/
+
+# Environment files
+.env
+.env.local
+

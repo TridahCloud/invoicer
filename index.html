@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoicer - Modern Invoice Generator</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <img src="tridah icon.png" alt="Tridah" class="logo">
+                <span class="logo-text">Tridah</span>
+            </div>
+            <nav class="nav">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="login.html" class="nav-link" id="authLink">Login</a>
+            </nav>
+        </header>
+
+        <main class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Create Professional Invoices
+                    <span class="gradient-text">In Seconds</span>
+                </h1>
+                <p class="hero-description">
+                    Beautiful, modern invoices that impress clients. Free forever. 
+                    No hidden fees. Open source.
+                </p>
+
+                <div class="cta-container">
+                    <div class="cta-card cta-guest">
+                        <div class="cta-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h2 class="cta-title">Quick Invoice</h2>
+                        <p class="cta-description">
+                            Create an invoice instantly without signing up. Perfect for one-time use.
+                        </p>
+                        <a href="invoice.html" class="btn btn-secondary">
+                            Create Now
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="cta-card cta-account">
+                        <div class="cta-badge">Recommended</div>
+                        <div class="cta-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h2 class="cta-title">Sign Up Free</h2>
+                        <p class="cta-description">
+                            Save your info, track invoices, manage clients, and organize with tags. All free.
+                        </p>
+                        <a href="signup.html" class="btn btn-primary">
+                            Get Started
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="stats-showcase">
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 010 7.75"/>
+                                </svg>
+                            </div>
+                            <div class="stat-number" id="statUsers">0</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10 9 9 9 8 9"/>
+                                </svg>
+                            </div>
+                            <div class="stat-number" id="statInvoices">0</div>
+                            <div class="stat-label">Invoices Generated</div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="stat-number" id="statPaid">$0</div>
+                            <div class="stat-label">Total Amount Paid</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <section id="features" class="features">
+            <h2 class="section-title">Everything You Need</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">Beautiful Design</h3>
+                    <p class="feature-description">Sleek, modern invoices that look professional and make a great impression.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-description">Inline editing and real-time calculations. No clunky forms or page reloads.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3 class="feature-title">Save & Track</h3>
+                    <p class="feature-description">Keep all your invoices organized and track their status with custom tags.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Pre-made Items</h3>
+                    <p class="feature-description">Save commonly used items for quick invoice creation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔓</div>
+                    <h3 class="feature-title">Free Forever</h3>
+                    <p class="feature-description">100% free. No premium tiers. No hidden costs. Open source.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3 class="feature-title">A4 Perfect</h3>
+                    <p class="feature-description">Print-ready invoices that look exactly like professional documents.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="about-content">
+                <h2 class="section-title">Powered by Tridah</h2>
+                <p class="about-text">
+                    Invoicer is a free service provided by <a href="https://tridah.cloud" target="_blank"></a>Tridah</a>, a non-profit organization 
+                    dedicated to creating useful tools for everyone. Our mission is to make 
+                    professional invoicing accessible to all freelancers, small businesses, 
+                    and entrepreneurs worldwide.
+                </p>
+                <p class="about-text">
+                    This project is open source and licensed under MIT. We believe in 
+                    transparency, community, and giving back.
+                </p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <img src="tridah icon.png" alt="Tridah" class="footer-logo">
+                    <span class="footer-text">© 2025 Tridah. MIT License.</span>
+                </div>
+                <div class="footer-right">
+                    <a href="https://github.com/TridahCloud/invoicer" class="footer-link">GitHub</a>
+                    <!-- <a href="#" class="footer-link">Documentation</a>
+                    <a href="#" class="footer-link">Contact</a> -->
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Check if user is logged in
+        fetch('api/check-session.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    const authLink = document.getElementById('authLink');
+                    authLink.textContent = 'Dashboard';
+                    authLink.href = 'dashboard.html';
+                }
+            })
+            .catch(error => {
+                console.log('Not logged in');
+            });
+        
+        // Load stats
+        fetch('api/get-stats.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.stats) {
+                    document.getElementById('statUsers').textContent = formatNumber(data.stats.users);
+                    document.getElementById('statInvoices').textContent = formatNumber(data.stats.invoices);
+                    document.getElementById('statPaid').textContent = formatCurrency(data.stats.amount_paid);
+                }
+            })
+            .catch(error => {
+                console.log('Error loading stats');
+            });
+        
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        function formatCurrency(amount) {
+            return '$' + parseFloat(amount).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    </script>
+</body>
+</html>
+

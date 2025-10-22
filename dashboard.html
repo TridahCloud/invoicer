@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Invoicer</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="tridah icon.png" alt="Tridah" class="sidebar-logo">
+                <h2 class="sidebar-title">Invoicer</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="invoices">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    Invoices
+                </a>
+                <a href="#" class="nav-item" data-view="clients">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    Clients
+                </a>
+                <a href="#" class="nav-item" data-view="items">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="8" y1="6" x2="21" y2="6"/>
+                        <line x1="8" y1="12" x2="21" y2="12"/>
+                        <line x1="8" y1="18" x2="21" y2="18"/>
+                        <line x1="3" y1="6" x2="3.01" y2="6"/>
+                        <line x1="3" y1="12" x2="3.01" y2="12"/>
+                        <line x1="3" y1="18" x2="3.01" y2="18"/>
+                    </svg>
+                    Saved Items
+                </a>
+                <a href="#" class="nav-item" data-view="tags">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                        <line x1="7" y1="7" x2="7.01" y2="7"/>
+                    </svg>
+                    Tags
+                </a>
+                <a href="#" class="nav-item" data-view="profile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Profile
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="nav-item" id="logoutBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <div class="header-left">
+                    <h1 class="page-title" id="pageTitle">My Invoices</h1>
+                    <p class="page-subtitle" id="pageSubtitle">Manage and track your invoices</p>
+                </div>
+                <div class="header-right">
+                    <a href="invoice.html" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        New Invoice
+                    </a>
+                </div>
+            </header>
+
+            <!-- Invoices View -->
+            <div class="view-container" id="invoicesView">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon stat-draft">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="statDraft">0</div>
+                            <div class="stat-label">Drafts</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-sent">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="statSent">0</div>
+                            <div class="stat-label">Sent</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-paid">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="statPaid">0</div>
+                            <div class="stat-label">Paid</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-total">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="statTotal">$0</div>
+                            <div class="stat-label">Total Revenue</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tag Filter Bar -->
+                <div class="tag-filter-bar" id="tagFilterBar" style="display: none;">
+                    <span style="font-weight: 600; color: var(--dark);">Filter by tags:</span>
+                    <div id="tagFilters">
+                        <!-- Tag filters will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Invoices Table -->
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Client</th>
+                                <th>Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Tags</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoicesTableBody">
+                            <tr>
+                                <td colspan="8" class="no-data">
+                                    <div class="empty-state">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                            <polyline points="14 2 14 8 20 8"/>
+                                        </svg>
+                                        <h3>No invoices yet</h3>
+                                        <p>Create your first invoice to get started</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Clients View -->
+            <div class="view-container" id="clientsView" style="display: none;">
+                <div class="items-header">
+                    <button class="btn btn-primary" id="addClientBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Add Client
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Invoices</th>
+                                <th>Total Invoiced</th>
+                                <th>Paid</th>
+                                <th>Overdue</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTableBody">
+                            <tr>
+                                <td colspan="8" class="no-data">
+                                    <div class="empty-state">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                                            <circle cx="9" cy="7" r="4"/>
+                                        </svg>
+                                        <h3>No clients yet</h3>
+                                        <p>Add clients to quickly populate invoice details</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Saved Items View -->
+            <div class="view-container" id="itemsView" style="display: none;">
+                <div class="items-header">
+                    <button class="btn btn-primary" id="addItemBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Add New Item
+                    </button>
+                </div>
+                
+                <div class="items-grid" id="itemsGrid">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="8" y1="6" x2="21" y2="6"/>
+                            <line x1="8" y1="12" x2="21" y2="12"/>
+                            <line x1="8" y1="18" x2="21" y2="18"/>
+                        </svg>
+                        <h3>No saved items</h3>
+                        <p>Create reusable items for faster invoice creation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags View -->
+            <div class="view-container" id="tagsView" style="display: none;">
+                <div class="items-header">
+                    <button class="btn btn-primary" id="addTagBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Create Tag
+                    </button>
+                </div>
+                
+                <div class="tags-grid" id="tagsGrid">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                            <line x1="7" y1="7" x2="7.01" y2="7"/>
+                        </svg>
+                        <h3>No tags yet</h3>
+                        <p>Create tags to organize your invoices</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile View -->
+            <div class="view-container" id="profileView" style="display: none;">
+                <form class="profile-form" id="profileForm">
+                    <div class="form-section">
+                        <h3 class="section-title">Company Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Company Logo</label>
+                            <div class="logo-upload-section">
+                                <div class="logo-preview" id="logoPreview">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                    <span>No logo uploaded</span>
+                                </div>
+                                <input type="file" id="profileLogoInput" accept="image/*" style="display: none;">
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('profileLogoInput').click()">
+                                    Upload Logo
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" class="form-input styled-input" id="profileCompanyName" placeholder="Your Business Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Company Address</label>
+                            <textarea class="form-input styled-input" id="profileCompanyAddress" rows="3" placeholder="Street Address&#10;City, State ZIP"></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-input styled-input" id="profileCompanyPhone" placeholder="(555) 123-4567">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input styled-input" id="profileCompanyEmail" placeholder="company@email.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Website</label>
+                            <input type="url" class="form-input styled-input" id="profileCompanyWebsite" placeholder="https://yourwebsite.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="section-title">Invoice Settings</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Invoice Number Prefix</label>
+                            <input type="text" class="form-input styled-input" id="profileInvoicePrefix" placeholder="INV" maxlength="20">
+                            <small class="form-help">This prefix will be added to all your invoice numbers (e.g., INV-001, INV-002)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Next Invoice Number</label>
+                            <input type="number" class="form-input styled-input" id="profileNextInvoiceNumber" placeholder="1" min="1">
+                            <small class="form-help">The next invoice number to be used. This will auto-increment with each new invoice.</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="section-title">Bank Details</h3>
+                        <small class="form-help" style="display: block; margin-bottom: 1rem;">Add your bank details to display payment information on invoices</small>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Bank Name</label>
+                            <input type="text" class="form-input styled-input" id="profileBankName" placeholder="e.g., Chase Bank, Bank of America">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Account Name</label>
+                            <input type="text" class="form-input styled-input" id="profileBankAccountName" placeholder="e.g., Your Business Name">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Routing Number Label</label>
+                                <input type="text" class="form-input styled-input" id="profileBankRoutingLabel" placeholder="Routing Number, BSB, Sort Code, etc.">
+                                <small class="form-help">Customize the label based on your country (e.g., "BSB" in Australia, "Sort Code" in UK)</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Routing Number</label>
+                                <input type="text" class="form-input styled-input" id="profileBankRoutingNumber" placeholder="123456789">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Account Number</label>
+                            <input type="text" class="form-input styled-input" id="profileBankAccountNumber" placeholder="1234567890">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <button type="submit" class="btn btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                                <polyline points="17 21 17 13 7 13 7 21"/>
+                                <polyline points="7 3 7 8 15 8"/>
+                            </svg>
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div class="modal" id="addItemModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Item</h2>
+                <button class="modal-close" id="closeModal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="itemForm">
+                <input type="hidden" id="editItemId">
+                <div class="form-group">
+                    <label class="form-label">Item Name</label>
+                    <input type="text" class="form-input styled-input" id="itemName" required placeholder="e.g., Content Writing">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-input styled-input" id="itemDescription" rows="2" placeholder="Brief description"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Unit</label>
+                        <input type="text" class="form-input styled-input" id="itemUnit" value="items" placeholder="e.g., hours, items">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Default Price</label>
+                        <input type="number" class="form-input styled-input" id="itemPrice" step="0.01" min="0" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelItem">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/>
+                            <polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                        Save Item
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Tag Modal -->
+    <div class="modal" id="addTagModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Tag</h2>
+                <button class="modal-close" id="closeTagModal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="tagForm">
+                <div class="form-group">
+                    <label class="form-label">Tag Name</label>
+                    <input type="text" class="form-input styled-input" id="tagName" required placeholder="e.g., Urgent, Pending Payment">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Color</label>
+                    <div class="color-picker-grid">
+                        <label class="color-option"><input type="radio" name="tagColor" value="#3B82F6" checked><span style="background-color: #3B82F6;"></span></label>
+                        <label class="color-option"><input type="radio" name="tagColor" value="#10B981"><span style="background-color: #10B981;"></span></label>
+                        <label class="color-option"><input type="radio" name="tagColor" value="#F59E0B"><span style="background-color: #F59E0B;"></span></label>
+                        <label class="color-option"><input type="radio" name="tagColor" value="#EF4444"><span style="background-color: #EF4444;"></span></label>
+                        <label class="color-option"><input type="radio" name="tagColor" value="#8B5CF6"><span style="background-color: #8B5CF6;"></span></label>
+                        <label class="color-option"><input type="radio" name="tagColor" value="#EC4899"><span style="background-color: #EC4899;"></span></label>
+                        <label class="color-option"><input type="radio" name="tagColor" value="#6B7280"><span style="background-color: #6B7280;"></span></label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelTag">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                        </svg>
+                        Create Tag
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Client Modal -->
+    <div class="modal" id="addClientModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="clientModalTitle">Add Client</h2>
+                <button class="modal-close" id="closeClientModal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="clientForm">
+                <input type="hidden" id="editClientId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Client Name *</label>
+                        <input type="text" class="form-input styled-input" id="clientName" required placeholder="Company or Person Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input styled-input" id="clientEmail" placeholder="client@email.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-input styled-input" id="clientPhone" placeholder="(555) 123-4567">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <textarea class="form-input styled-input" id="clientAddress" rows="2" placeholder="Street Address"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-input styled-input" id="clientCity" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">State/Province</label>
+                        <input type="text" class="form-input styled-input" id="clientState" placeholder="State">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">ZIP/Postal Code</label>
+                        <input type="text" class="form-input styled-input" id="clientZip" placeholder="12345">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Country</label>
+                        <input type="text" class="form-input styled-input" id="clientCountry" placeholder="Country">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-input styled-input" id="clientNotes" rows="2" placeholder="Additional notes about this client"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelClient">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/>
+                            <polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                        Save Client
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Assign Tags Modal -->
+    <div class="modal" id="assignTagsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Assign Tags</h2>
+                <button class="modal-close" id="closeAssignTagsModal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="tag-assignment-content">
+                <p class="modal-description">Select tags for invoice <strong id="assignInvoiceNumber"></strong></p>
+                <input type="hidden" id="assignInvoiceId">
+                <div class="tag-checkboxes" id="tagCheckboxes">
+                    <!-- Tags will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelAssignTags">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveTagsBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                    </svg>
+                    Save Tags
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,132 @@
+/* Customization Sidebar */
+
+.customize-sidebar {
+    position: fixed;
+    right: -350px;
+    top: 0;
+    width: 350px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.customize-sidebar.active {
+    right: 0;
+}
+
+.customize-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--gray-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary);
+    color: var(--white);
+}
+
+.customize-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.close-customize {
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-customize:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.close-customize svg {
+    width: 24px;
+    height: 24px;
+}
+
+.customize-content {
+    padding: var(--spacing-lg);
+}
+
+.customize-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.customize-section h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--gray-lighter);
+}
+
+.toggle-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    border-radius: var(--radius-sm);
+    padding-left: var(--spacing-xs);
+}
+
+.toggle-option:hover {
+    background: var(--gray-lighter);
+}
+
+.toggle-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.toggle-option span {
+    flex: 1;
+    font-size: 0.938rem;
+    color: var(--dark);
+}
+
+/* Hidden sections */
+.section-toggleable.hidden {
+    display: none !important;
+}
+
+/* Overlay when sidebar is open */
+.customize-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+}
+
+.customize-overlay.active {
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .customize-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+}
+
