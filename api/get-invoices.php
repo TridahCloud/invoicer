@@ -12,15 +12,35 @@ try {
     $db = getDBConnection();
     $userId = getCurrentUserId();
     
-    // Get all invoices for user
-    $stmt = $db->prepare('
+    // Get date filter parameters
+    $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : null;
+    $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
+    
+    // Build the query with optional date filtering
+    $query = '
         SELECT id, invoice_number, client_name, issue_date, due_date, 
                status, total, created_at
         FROM invoices 
         WHERE user_id = ?
-        ORDER BY created_at DESC
-    ');
-    $stmt->execute([$userId]);
+    ';
+    $params = [$userId];
+    
+    if ($startDate && $endDate) {
+        $query .= ' AND DATE(issue_date) BETWEEN ? AND ?';
+        $params[] = $startDate;
+        $params[] = $endDate;
+    } elseif ($startDate) {
+        $query .= ' AND DATE(issue_date) >= ?';
+        $params[] = $startDate;
+    } elseif ($endDate) {
+        $query .= ' AND DATE(issue_date) <= ?';
+        $params[] = $endDate;
+    }
+    
+    $query .= ' ORDER BY created_at DESC';
+    
+    $stmt = $db->prepare($query);
+    $stmt->execute($params);
     $invoices = $stmt->fetchAll();
     
     // Get tags for each invoice

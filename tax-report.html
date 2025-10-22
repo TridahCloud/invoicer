@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Report - Invoicer</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            margin: 0;
+            padding: 2rem;
+            color: var(--dark);
+        }
+        
+        .report-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+        }
+        
+        .report-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .report-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .report-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .meta-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--gray-light);
+            padding-bottom: 0.25rem;
+        }
+        
+        .meta-section p {
+            margin: 0.25rem 0;
+            color: var(--gray);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-card {
+            background: var(--gray-lighter);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .summary-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .invoices-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .invoices-table th {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .invoices-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 0.875rem;
+        }
+        
+        .invoices-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .invoices-table tr:nth-child(even) {
+            background: var(--gray-lighter);
+        }
+        
+        .amount {
+            text-align: right;
+            font-weight: 600;
+            color: var(--success);
+        }
+        
+        .clients-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .clients-table th {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .clients-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 0.875rem;
+        }
+        
+        .clients-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .clients-table tr:nth-child(even) {
+            background: var(--gray-lighter);
+        }
+        
+        .total-row {
+            background: var(--primary) !important;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        .total-row td {
+            border-bottom: none;
+        }
+        
+        .report-footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-light);
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+        
+        .print-actions {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 1000;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gray);
+        }
+        
+        @media print {
+            .print-actions {
+                display: none;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .report-container {
+                max-width: none;
+            }
+            
+            .invoices-table, .clients-table {
+                box-shadow: none;
+                border: 1px solid var(--gray-light);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-actions">
+        <button onclick="window.print()" class="btn btn-primary">
+            🖨️ Print Report
+        </button>
+        <a href="dashboard.html" class="btn btn-secondary">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <div class="report-container" id="reportContainer">
+        <!-- Report content will be populated by JavaScript -->
+    </div>
+
+    <script>
+        // Get report data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const startDate = urlParams.get('start_date');
+        const endDate = urlParams.get('end_date');
+        
+        // Load and display the tax report
+        async function loadTaxReport() {
+            try {
+                const params = new URLSearchParams();
+                if (startDate) params.append('start_date', startDate);
+                if (endDate) params.append('end_date', endDate);
+                
+                const response = await fetch(`api/generate-tax-report.php?${params}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayTaxReport(data.report);
+                } else {
+                    document.getElementById('reportContainer').innerHTML = 
+                        '<div style="text-align: center; padding: 2rem;"><h2>Error loading report</h2><p>' + data.message + '</p></div>';
+                }
+            } catch (error) {
+                console.error('Error loading tax report:', error);
+                document.getElementById('reportContainer').innerHTML = 
+                    '<div style="text-align: center; padding: 2rem;"><h2>Error loading report</h2><p>Please try again later.</p></div>';
+            }
+        }
+        
+        function displayTaxReport(report) {
+            const container = document.getElementById('reportContainer');
+            
+            // Format currency
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                }).format(amount);
+            };
+            
+            // Format date
+            const formatDate = (dateString) => {
+                return new Date(dateString).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            };
+            
+            // Build date range text
+            let dateRangeText = 'All Time';
+            if (report.date_range.start && report.date_range.end) {
+                dateRangeText = `${formatDate(report.date_range.start)} - ${formatDate(report.date_range.end)}`;
+            } else if (report.date_range.start) {
+                dateRangeText = `From ${formatDate(report.date_range.start)}`;
+            } else if (report.date_range.end) {
+                dateRangeText = `Until ${formatDate(report.date_range.end)}`;
+            }
+            
+            container.innerHTML = `
+                <div class="report-header">
+                    <h1 class="report-title">Tax Report</h1>
+                    <p class="report-subtitle">Income Summary for ${dateRangeText}</p>
+                    <p style="color: var(--gray); font-size: 0.875rem;">
+                        Generated on ${formatDate(report.generated_at)}
+                    </p>
+                </div>
+                
+                <div class="report-meta">
+                    <div class="meta-section">
+                        <h3>Business Information</h3>
+                        <p><strong>Company:</strong> ${report.user.company_name || 'Not specified'}</p>
+                        <p><strong>Email:</strong> ${report.user.company_email || 'Not specified'}</p>
+                        <p><strong>Phone:</strong> ${report.user.company_phone || 'Not specified'}</p>
+                    </div>
+                    <div class="meta-section">
+                        <h3>Report Details</h3>
+                        <p><strong>Period:</strong> ${dateRangeText}</p>
+                        <p><strong>Generated:</strong> ${formatDate(report.generated_at)}</p>
+                        <p><strong>Status:</strong> Paid Invoices Only</p>
+                    </div>
+                </div>
+                
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <div class="summary-value">${formatCurrency(report.summary.total_income)}</div>
+                        <div class="summary-label">Total Income</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-value">${report.summary.invoice_count}</div>
+                        <div class="summary-label">Paid Invoices</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-value">${report.summary.client_count}</div>
+                        <div class="summary-label">Clients</div>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Invoice Details</h2>
+                <table class="invoices-table">
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Client</th>
+                            <th>Issue Date</th>
+                            <th>Due Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${report.invoices.map(invoice => `
+                            <tr>
+                                <td>${invoice.invoice_number}</td>
+                                <td>${invoice.client_name}</td>
+                                <td>${formatDate(invoice.issue_date)}</td>
+                                <td>${formatDate(invoice.due_date)}</td>
+                                <td class="amount">${formatCurrency(invoice.total)}</td>
+                            </tr>
+                        `).join('')}
+                        <tr class="total-row">
+                            <td colspan="4"><strong>Total Income</strong></td>
+                            <td class="amount"><strong>${formatCurrency(report.summary.total_income)}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2 class="section-title">Client Summary</h2>
+                <table class="clients-table">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Invoices</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${report.client_summary.map(client => `
+                            <tr>
+                                <td>${client.name}</td>
+                                <td>${client.invoice_count}</td>
+                                <td class="amount">${formatCurrency(client.total_amount)}</td>
+                            </tr>
+                        `).join('')}
+                        <tr class="total-row">
+                            <td><strong>Total</strong></td>
+                            <td><strong>${report.summary.invoice_count}</strong></td>
+                            <td class="amount"><strong>${formatCurrency(report.summary.total_income)}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="report-footer">
+                    <p>This report contains only paid invoices for tax purposes.</p>
+                    <p>Generated by Invoicer - <a href="https://invoicer.tridah.cloud" target="_blank">invoicer.tridah.cloud</a></p>
+                </div>
+            `;
+        }
+        
+        // Load the report when page loads
+        document.addEventListener('DOMContentLoaded', loadTaxReport);
+    </script>
+</body>
+</html>

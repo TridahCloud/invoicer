@@ -150,6 +150,21 @@
                     </div>
                 </div>
 
+                <!-- Date Range Filter -->
+                <div class="date-filter-bar" id="dateFilterBar">
+                    <div class="filter-group">
+                        <label for="startDate" class="filter-label">From:</label>
+                        <input type="date" id="startDate" class="filter-input">
+                    </div>
+                    <div class="filter-group">
+                        <label for="endDate" class="filter-label">To:</label>
+                        <input type="date" id="endDate" class="filter-input">
+                    </div>
+                    <button id="applyDateFilter" class="btn btn-primary btn-sm">Apply Filter</button>
+                    <button id="clearDateFilter" class="btn btn-secondary btn-sm">Clear</button>
+                    <button id="generateTaxReport" class="btn btn-success btn-sm">📊 Tax Report</button>
+                </div>
+
                 <!-- Tag Filter Bar -->
                 <div class="tag-filter-bar" id="tagFilterBar" style="display: none;">
                     <span style="font-weight: 600; color: var(--dark);">Filter by tags:</span>

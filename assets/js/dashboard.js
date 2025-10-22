@@ -120,11 +120,24 @@ function attachEventListeners() {
     
     // Profile form
     document.getElementById('profileForm').addEventListener('submit', saveProfile);
+    
+    // Date filter buttons
+    document.getElementById('applyDateFilter').addEventListener('click', applyDateFilter);
+    document.getElementById('clearDateFilter').addEventListener('click', clearDateFilter);
+    document.getElementById('generateTaxReport').addEventListener('click', generateTaxReport);
 }
 
 // Load invoices
-function loadInvoices() {
-    fetch('api/get-invoices.php')
+function loadInvoices(dateFilter = null) {
+    let url = 'api/get-invoices.php';
+    if (dateFilter) {
+        const params = new URLSearchParams();
+        if (dateFilter.startDate) params.append('start_date', dateFilter.startDate);
+        if (dateFilter.endDate) params.append('end_date', dateFilter.endDate);
+        url += '?' + params.toString();
+    }
+    
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -971,5 +984,51 @@ function deleteClient(clientId) {
         console.error('Error:', error);
         alert('Error deleting client');
     });
+}
+
+// Date filter functions
+function applyDateFilter() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    if (!startDate && !endDate) {
+        alert('Please select at least one date');
+        return;
+    }
+    
+    if (startDate && endDate && startDate > endDate) {
+        alert('Start date cannot be after end date');
+        return;
+    }
+    
+    const dateFilter = {
+        startDate: startDate || null,
+        endDate: endDate || null
+    };
+    
+    loadInvoices(dateFilter);
+}
+
+function clearDateFilter() {
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+    loadInvoices();
+}
+
+function generateTaxReport() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    let url = 'tax-report.html';
+    const params = new URLSearchParams();
+    
+    if (startDate) params.append('start_date', startDate);
+    if (endDate) params.append('end_date', endDate);
+    
+    if (params.toString()) {
+        url += '?' + params.toString();
+    }
+    
+    window.open(url, '_blank');
 }
 
