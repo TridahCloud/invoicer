@@ -1,3 +1,6 @@
+# NOTICE: Invoicer now integrated with our main project
+Please check out [Tridah Drive](https://drive.tridah.cloud) where all of our apps have been combined!
+
 # Invoicer 💼
 
 A free, modern, and beautiful web-based invoice generator. Create professional invoices in seconds, track their status, manage clients, and organize with tags - all completely free.
